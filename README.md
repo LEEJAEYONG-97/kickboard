@@ -3,23 +3,22 @@
 The project goal is to analyze shared scooter towing data and parking zones to identify patterns of illegal and unauthorized parking, while capturing relevant footage to visually demonstrate the issues, ultimately seeking solutions for parking improvement.
 
 ![image alt](https://github.com/LEEJAEYONG-97/kickboard/blob/2fd67c70a1ef3ba3a76fb876959644cd7cba1873/data/img/wordcloud.jpg)
-![image](https://github.com/LEEJAEYONG-97/portfolio/blob/40649e98863efe4b65a46768d6138112e88cc799/app/static/images/total_sales.jpg)
 
 # Data Collection
 
-** Comprehensive information on Seoul's bike-sharing system (따릉이 대여소)**:
+**Comprehensive information on Seoul's bike-sharing system (따릉이 대여소)**:
 
   Rental Stations, Location, latitude, longitude
 
-** Data on Seoul's electric scooter towing incidents**:
+**Data on Seoul's electric scooter towing incidents**:
 
   Towing Incidents, Report date, address, type
 
-** Current status of electric scooter parking zones in Seoul**:
+**Current status of electric scooter parking zones in Seoul**:
 
   Parking Zones, Location, latitude, longitude
 
-** Nationwide administrative district code information**:
+**Nationwide administrative district code information**:
 
   Administrative Codes, Address
 
@@ -32,19 +31,6 @@ The project goal is to analyze shared scooter towing data and parking zones to i
 1. **Date sorting**
 2. **Type conversion**
 3. **Missing value removal**
-
-# ERD
-![image2](https://github.com/LEEJAEYONG-97/portfolio/blob/40649e98863efe4b65a46768d6138112e88cc799/app/static/images/erd.png)
-- **Date**: Film release date, sports event date, confirmed case date  
-- **Cnt (Total confirmed cases)**: Total number of COVID-19 confirmed cases  
-- **Deaths (Total deaths)**: Total number of COVID-19 deaths  
-- **Domestic_case**: Number of confirmed cases occurring domestically  
-- **Imported_case**: Number of confirmed cases from abroad  
-- **Total_Sales**: Total revenue of the film  
-- **Screen_cnt**: Number of screens showing the film  
-- **Audience**: Total number of viewers who watched the film  
-- **Organization**: Sports association for the respective sport  
-- **Attendance**: Number of spectators at the event 
 
 # EDA
 **Exploratory Data Analysis (EDA)**
