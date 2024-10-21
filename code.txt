@@ -1,0 +1,88 @@
+import cv2
+import os
+import torch
+from pathlib import Path
+from models.yolo import DetectionModel  # 모델 정의를 임포트
+
+# 체크포인트 로드
+model_path = Path('/content/yolov9/runs/train/yolov9-e-finetuning/weights/best.pt')
+checkpoint = torch.load(model_path, map_location='cpu')
+
+# 모델 객체 추출
+model = checkpoint['model']
+model.eval()
+
+# 비디오 파일 경로 및 출력 경로 설정
+video_path = r'C:/Users/M/jupyter_Work/20240801.mp4'
+output_video_path = r'C:/Users/M/jupyter_Work/output_video.avi'
+capture_dir = r'C:/Users/M/jupyter_Work/captured_images/'
+
+# 디렉토리 존재 확인 및 생성
+os.makedirs(capture_dir, exist_ok=True)
+
+# 비디오 파일 열기
+cap = cv2.VideoCapture(video_path)
+
+if not cap.isOpened():
+    print(f"Error: Unable to open video file at {video_path}")
+    exit()
+
+# 비디오 작성기 설정
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter(output_video_path, fourcc, 20.0, (int(cap.get(3)), int(cap.get(4))))
+
+# 캡처된 객체 저장을 위한 카운터
+capture_counter = 0
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    # 프레임을 모델에 입력
+    img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    img = torch.from_numpy(img).float() / 255.0
+    img = img.permute(2, 0, 1).unsqueeze(0)
+
+    with torch.no_grad():
+        results = model(img)[0]
+
+    # 결과 처리
+    results = results.cpu().numpy()
+    boxes = results[..., :4]
+    confidences = results[..., 4]
+    class_ids = results[..., 5]
+
+    for i, conf in enumerate(confidences):
+        if conf >= 0.5:
+            x1, y1, x2, y2 = boxes[i]
+            x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
+            
+            # 객체를 프레임에서 잘라내기
+            obj_img = frame[y1:y2, x1:x2]
+
+            # 캡처된 객체 저장
+            capture_counter += 1
+            obj_image_path = os.path.join(capture_dir, f'captured_object_{capture_counter}.png')
+            cv2.imwrite(obj_image_path, obj_img)
+
+            # 객체를 프레임에 그리기
+            cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+            cv2.putText(frame, f'{conf:.2f}', (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+    # 결과를 비디오 파일로 저장
+    out.write(frame)
+
+    # 화면에 표시 (디버깅용)
+    cv2.imshow('Frame', frame)
+
+    # 'q'를 눌러 종료
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# 자원 해제
+cap.release()
+out.release()
+cv2.destroyAllWindows()
+
+print(f"Video saved to {output_video_path}")

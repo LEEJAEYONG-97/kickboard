@@ -1,0 +1,14 @@
+names:
+- kickboard_driving
+- kickboard_habitual
+- kickboard_neglect
+nc: 3
+roboflow:
+  license: CC BY 4.0
+  project: deep_learning_project_neglect
+  url: https://universe.roboflow.com/jeongwan-ryu-n5zsh/deep_learning_project_neglect/dataset/2
+  version: 2
+  workspace: jeongwan-ryu-n5zsh
+test: ../test/images
+train: ../train/images
+val: ../valid/images
