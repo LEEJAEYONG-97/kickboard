@@ -22,7 +22,7 @@ The project goal is to analyze shared scooter towing data and parking zones to i
 
   Administrative Codes, Address
 
-**Source**: DATA.GO.KR
+**Source**: DATA.GO.KR, data.seoul.go.kr
 
 **Data common collection period**: July 2021 to September 2023
 
@@ -34,154 +34,90 @@ The project goal is to analyze shared scooter towing data and parking zones to i
 
 # EDA
 **Exploratory Data Analysis (EDA)**
-Chart of monthly confirmed cases and deaths
 
-![image16](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda.png)
+Seoul Electric Scooter Towing Incidents Chart
 
-![image3](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda1.png)
+![image16](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/board.png)
 
-Chart of confirmed cases and deaths by region
+Comparison Chart of Parking Areas for Seoul's Public Bikes (따릉이) and Electric Scooters
 
-![image4](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda2.png)
+![image3](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/parking.png)
 
-Chart of monthly confirmed cases and attendance figures
+Seoul Electric Scooter Parking Areas
 
-![image5](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda3.png)
+![image4](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/kickboardpark.png)
 
-Chart of the number of games played without spectators by association
+Map Showing Towing Incidents of Electric Scooters in Seoul
 
-![image8](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda4.png)
+![image5](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/map.png)
 
-Chart of monthly attendance figures by sports association
+Areas with High Towing Incidents: Gangnam
 
-![image9](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda5.png)
-![image12](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda6.png)
-![image13](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda7.png)
-![image14](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda8.png)
-![image15](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda9.png)
+![image8](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/gangnam.png)
 
-Number of films released and number of screening theaters by year
-![image17](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/eda10.png)
-# Model Design
+Areas with High Towing Incidents: Mapo
+
+![image9](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/mapo.png)
+
+# Model Design for Creating an Image Dataset with Roboflow
 
 1. **Data Preparation**
-   - Confirm data characteristics
-   - Handle missing values
-   - Extract variables
+   - Confirm image characteristics (resolution, format, etc.)
+   - Organize images into appropriate folders (e.g., training, validation)
+   - Annotate images as necessary
 
-2. **Input and Prediction Variable Setup**
-   - Set up input and prediction variables
-   - Create sequence data
+2. **Upload Images**
+   - Upload the images to Roboflow
+   - Ensure proper upload settings (e.g., image quality, format)
 
-3. **Data Normalization**
-   - Apply MinMaxScaler for normalization
-   - Encode categorical variables
+3. **Data Annotation**
+   - Use Roboflow’s annotation tools to label images
+   - Define classes and assign labels to each image
 
-4. **Data Splitting**
-   - Split the data into training (80%) and testing (20%) sets
+4. **Data Augmentation**
+   - Apply augmentation techniques (e.g., rotation, flipping, scaling) to increase dataset variability
+   - Review augmented images for quality and relevance
 
-5. **Model Comparison**
-   - Compare MSE and R² Score among four models (LSTM, VAR, SARIMA, ARIMA)
+5. **Dataset Configuration**
+   - Configure the dataset settings (e.g., image format, annotation format)
+   - Set the desired output size for the images
 
-6. **Prediction Results Validation**
-   - Validate the prediction results
+6. **Data Splitting**
+   - Split the dataset into training, validation, and test sets according to specified ratios
 
-7. **Web Implementation of Prediction Model**
-   - Implement the prediction model as a web service
+7. **Export Dataset**
+   - Export the dataset in the desired format
+![image12](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/roboflow.png)
+![image13](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/roboflow2.png)
 
-# Models
+### YOLO (You Only Look Once)
 
-### LSTM (Long Short-Term Memory)
-LSTM is a type of recurrent neural network (RNN) designed to model time series data and sequences. It addresses the problem of vanishing gradients in standard RNNs by using memory cells that can maintain information over long periods. This makes LSTM particularly effective for tasks like speech recognition, language modeling, and time series forecasting, where past information is crucial for making predictions.
+YOLO is a state-of-the-art object detection algorithm known for its speed and accuracy. Unlike traditional object detection methods that typically apply a classifier to different sections of an image, YOLO approaches the problem as a single regression task, predicting bounding boxes and class probabilities directly from full images in one evaluation.
 
-### ARIMA (AutoRegressive Integrated Moving Average)
-ARIMA is a popular statistical model used for forecasting time series data. It combines three components: 
-- **AutoRegressive (AR)**: uses the relationship between an observation and a number of lagged observations.
-- **Integrated (I)**: involves differencing the data to make it stationary (constant mean and variance).
-- **Moving Average (MA)**: uses the dependency between an observation and a residual error from a moving average model.
+#### Key Features:
+- **Real-time Detection**: YOLO processes images quickly, allowing for real-time object detection applications, making it suitable for use in video streams and live feeds.
+- **Single Neural Network**: It uses a single convolutional neural network (CNN) that divides the image into a grid and predicts bounding boxes and class probabilities simultaneously.
+- **Unified Architecture**: YOLO's unified architecture simplifies the detection process and enhances performance, as it eliminates the need for separate stages in the detection pipeline.
 
-ARIMA is well-suited for univariate time series forecasting, particularly when the data shows trends or seasonality.
+#### Advantages:
+- **Speed**: YOLO can detect objects in images at an impressive frame rate, making it ideal for applications requiring quick responses, such as autonomous driving and surveillance.
+- **Global Context**: By looking at the entire image rather than patches, YOLO captures contextual information, improving accuracy in detecting objects within their surroundings.
 
-### SARIMA (Seasonal AutoRegressive Integrated Moving Average)
+#### Applications:
+YOLO is widely used in various fields, including:
+- **Autonomous Vehicles**: For detecting pedestrians, vehicles, and obstacles.
+- **Surveillance Systems**: To monitor areas for specific objects or behaviors.
+- **Retail Analytics**: For counting customers or analyzing shopping behavior.
 
-**SARIMA** is an advanced time series forecasting model that incorporates seasonal effects alongside the features of the ARIMA model. It is particularly useful for datasets exhibiting seasonality, trends, and non-stationarity.
 
-**Components:**
-- **Seasonal (S)**: Captures seasonal patterns in the data, allowing the model to adjust for fluctuations that occur at regular intervals.
-- **AutoRegressive (AR)**: Models the relationship between an observation and a specified number of lagged observations (previous time points).
-- **Integrated (I)**: Involves differencing the data to achieve stationarity, which means the mean and variance of the series remain constant over time.
-- **Moving Average (MA)**: Accounts for the relationship between an observation and a residual error from a moving average model applied to lagged observations.
+# Model Evaluation of YOLOv9
+Performance Comparison of YOLOv9
+![image15](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/result.png)
+The YOLOv9 model demonstrates superior performance compared to other models, with the highest precision, recall, and mean Average Precision (mAP) scores.
 
-**Model Specification:**
-A SARIMA model is typically expressed as SARIMA(p, d, q)(P, D, Q, s), where:
-- **p**: Order of the autoregressive component.
-- **d**: Degree of differencing.
-- **q**: Order of the moving average component.
-- **P**: Order of the seasonal autoregressive component.
-- **D**: Degree of seasonal differencing.
-- **Q**: Order of the seasonal moving average component.
-- **s**: Length of the seasonal cycle (e.g., 12 for monthly data).
+# Model demonstration photo
 
-**Applications:**
-SARIMA is widely used for forecasting in various fields, including finance, economics, and environmental science, where data shows both trends and seasonal variations.
-
-### VAR (Vector AutoRegression)
-
-**VAR** is a statistical model used to capture the linear interdependencies among multiple time series. It is particularly useful when you want to model and forecast systems with multiple variables that influence each other.
-
-**Components:**
-- **Multivariate**: VAR models multiple time series simultaneously, allowing for interactions among the variables.
-- **Lagged Relationships**: Each variable in the model is regressed on its own lagged values and the lagged values of all other variables in the system.
-
-**Model Specification:**
-A VAR model is typically expressed as VAR(p), where:
-- **p**: Number of lags used in the model.
-
-**Applications:**
-VAR is widely used in econometrics and finance for forecasting, policy analysis, and understanding the dynamic relationships between variables such as GDP, interest rates, and inflation.
-
-# Model Evaluation
-Performance comparison of the LSTM multivariate time series model
-
-||mse|R^2SCORE|
-|:---:|:---:|:---:|
-|<span style="color:red">LSTM</span>|1.3911326|0.999952|
-
-Performance comparison of the ARIMA time series model
-
-||mse|R^2SCORE|
-|:---:|:---:|:---:|
-|attendance|90915449.756|-8059363882.537|
-|screen_cnt|31337.131|-2780133.524|
-|total_sales|1.2273164|-4.3081347|
-|audience|107229772671.164|-5459062054041.54|
-
-Performance comparison of the SARIMA time series model
-
-||mse|R^2SCORE|
-|:---:|:---:|:---:|
-|attendance|90858232.219|-8054291730.872|
-|screen_cnt|31676.808|-2810268.624|
-|total_sales|1.25505872|-4.405515|
-|audience|110191715359.747|-5609854399625.223|
-
-Performance comparison of the VAR multivariate time series model
-
-||mse|R^2SCORE|
-|:---:|:---:|:---:|
-|VAR|5.239956|-0.332326|
-
-Comparison of MSE and R² Score among the four models:
-
-- **MSE**: LSTM > VAR > SARIMA > ARIMA  
-- **R² Score**: LSTM > VAR > SARIMA > ARIMA  
-
-The LSTM model demonstrates the best performance, as it has the highest MSE and R² Score.
-
-# Web structure
-
-![image7](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EA%B5%AC%EC%A1%B0%EB%8F%84.png)
-
-# WebService
-![image10](https://github.com/LEEJAEYONG-97/portfolio/blob/18685b37ed6c12806963fb97cff374a55bcf210e/app/static/images/web2.png)
-
+![image7](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/captured_object.png)
+![image14](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/processed_image%20(1).jpg)
+![image10](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/20240804_201946633%20-%20frame%20at%200m17s.jpg)
+![image24](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/processed_image%20(3).jpg)
