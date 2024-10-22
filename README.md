@@ -90,7 +90,7 @@ Areas with High Towing Incidents: Mapo
 ![image12](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/roboflow.png)
 ![image13](https://github.com/LEEJAEYONG-97/kickboard/blob/f34fde72790d7dc973ee932cd16ffdd7ad8dc3b6/data/img/roboflow2.png)
 
-### YOLO (You Only Look Once)
+# YOLO (You Only Look Once)
 
 YOLO is a state-of-the-art object detection algorithm known for its speed and accuracy. Unlike traditional object detection methods that typically apply a classifier to different sections of an image, YOLO approaches the problem as a single regression task, predicting bounding boxes and class probabilities directly from full images in one evaluation.
 
